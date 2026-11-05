@@ -436,24 +436,7 @@ build. Each section lives in its own file under [`blocks/`](blocks/):
 
 The file prefix controls the order: the build concatenates `blocks/*.md` in
 filename order, so `10_` always lands before `20_`. A new section just needs a
-new number. Regenerate and verify with:
-
-```bash
-python scripts/gen_badges.py
-python scripts/build_readme.py
-python scripts/check_links.py
-```
-
-`docs/` and `scripts/` are local tooling and source data: [`docs/classified.json`](docs/classified.json)
-is the registry of every link with its section, kind, byte totals and HF metadata,
-[`docs/links.txt`](docs/links.txt) is the normalized URL list, and `docs/raw/` holds
-the fetched model cards and API responses. Those files are intentionally not
-tracked; only the compiled document and its source blocks are published.
-
-When adding a row, include the owner badge, precision badge, size and one short
-clause saying what the artifact does. Sizes come from the Hugging Face API, not
-from the card's prose.
-
+new number.
 <div align="center">
 
 **Awesome MOSS-Image** · an unofficial community list for [OpenMOSS](https://github.com/OpenMOSS)'s MOSS-Image
