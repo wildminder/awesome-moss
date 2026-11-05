@@ -1,0 +1,14 @@
+# Generated / cache
+__pycache__/
+.pytest_cache/
+*.pyc
+tmp/
+
+# WorkBuddy project data
+.workbuddy-ai/
+
+scripts/
+docs/
+
+# Only the compiled document and its source blocks are tracked.
+_backup/
