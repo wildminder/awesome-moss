@@ -40,6 +40,7 @@ A curated list of checkpoints, quants, step-distilled builds, LoRAs, text encode
   * [Distilled adapters](#turbo-adapters)
   * [Merged few-step DiTs](#turbo-merged)
 * [LoRA &amp; adapters](#lora)
+  * [Condition-map control LoRAs](#lora-control)
 * [Text encoders &amp; prompt engines](#encoders)
 * [Workflows &amp; custom nodes](#workflow)
 * [Tools &amp; integrations](#tools)
@@ -143,7 +144,7 @@ Same architecture and sampling as Base, fine-tuned on curated data. It is the pa
 >
 > Destination folders: **Image Model** → `models/diffusion_models/`, **Text Encoder** → `models/text_encoders/`, **VAE** → `models/vae/`, both LoRA rows → `models/loras/`.
 >
-> The single-file **Text Encoder** is 19.31 GB while the four official diffusers shards total 16.79 GB — different packaging, not a different model. The two LoRA rows are community work by [darask0](https://huggingface.co/darask0/MOSS-Image-color-depth-control) and [chinoll](https://huggingface.co/chinoll/Moss-Image-Edit), repacked here for convenience rather than official OpenMOSS releases.
+> The single-file **Text Encoder** is 19.31 GB while the four official diffusers shards total 16.79 GB — different packaging, not a different model. The two LoRA rows are community work by darask0 and [chinoll](https://huggingface.co/chinoll/Moss-Image-Edit), repacked here for convenience rather than official OpenMOSS releases. The darask0 colour-depth repo is no longer public, so these repacked files are the surviving source.
 >
 > Ready-made graphs for this pack live in [Comfy-Org/workflow_templates](https://github.com/Comfy-Org/workflow_templates/blob/main/templates/image_moss_image_t2i.json) (text-to-image, Base text-to-image, edit LoRA).
 
@@ -230,7 +231,7 @@ Everything here trades sampling steps for fidelity. The official model is **50 s
 
 ### ▣ The lineage
 
-Most few-step builds descend from one DMD chain; the MFD and 16-step lines are independent.
+Most few-step builds descend from one SFT DMD chain; the MFD, 16-step and Base DMD2 lines are independent.
 
 ```text
 OpenMOSS-Team/MOSS-Image-SFT   50 steps · CFG 3 · shift 5
@@ -241,6 +242,9 @@ OpenMOSS-Team/MOSS-Image-SFT   50 steps · CFG 3 · shift 5
         │                                             └─► Spectrallic 8-step INT8 ConvRot
         ├─► congruency Turbo MFD            4–8 steps  (independent, Mean Flow)
         └─► Coffmeteor Turbo Lite          16 steps · CFG 1  (independent, beta)
+
+OpenMOSS-Team/MOSS-Image-Base  50 steps · CFG 3 · shift 5
+        └─► data-archetype DMD2           8 steps · CFG 1  (rank 128, shift 4.4817)
 ```
 
 The [IDM card](https://huggingface.co/akhaliq/MOSS-Image-IDM-2-Steps) documents the chain and an honest regression: its **v2 edit continuation degraded general text-to-image**, so v1 export 750 is the recommended T2I checkpoint. The 8-step DMD repos are marked work-in-progress by their author. Pick one family and keep its sampling settings.
@@ -252,10 +256,11 @@ The [IDM card](https://huggingface.co/akhaliq/MOSS-Image-IDM-2-Steps) documents 
 | Name | Steps | Precision | Size | Links | Notes |
 | :--- | :---: | :---: | :---: | :---: | :--- |
 | **IDM 2 steps** | 2 | ![bf16][badge-bf16] | 2.18 GB | [![][gh-akhaliq]](https://huggingface.co/akhaliq/MOSS-Image-IDM-2-Steps) | Two DiT forwards at 1024², no CFG. Community Intrinsic Distribution Matching; v1 at `runs/idm/export/000750/` for T2I, v2 folded adapter for editing. The repo is 89.79 GB including training caches. |
-| **rapid-moss 4-step** | 4 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-darask0]](https://huggingface.co/darask0/MOSS-Image_4-step_adapter_lora) | DMAD adapter on the 8-step DMD student, CFG-free. Ships `lora.safetensors` + `time_embedding.safetensors`. |
+| **rapid-moss 4-step** | 4 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-Epyan]](https://huggingface.co/Epyan/MOSS-Image_4-step_adapter_lora) | DMAD adapter on the 8-step DMD student, CFG-free. Ships `lora.safetensors` + `time_embedding.safetensors`, the training code and the card. **Mirror**: the original darask0 repo went private; this copy carries the same 46-file / 1.24 GB set, including the 1.19 GB LoRA, training code and original card. |
 | **SFT 4-step v2.0** | 4 | ![bf16][badge-bf16] ![fp32][badge-fp32] | 1.19 / 20.33 GB | [![][gh-akhaliq]](https://huggingface.co/akhaliq/MOSS-Image-SFT-4-steps) | The widely used 4-step line; also ships a 20.33 GB FP32 merged DiT and full diffusers layout. Parent of the merged GGUF below. |
 | **SFT 8-step DMD** | 8 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-lodestones]](https://huggingface.co/lodestones/MOSS-Image-SFT-8-steps-dmd) | Reference data-space DMD distill; `lora.safetensors`, `lora_latest.safetensors`, generator and full transformer. 23.98 GB repo. |
 | **Base 8-step DMD** | 8 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-lodestones]](https://huggingface.co/lodestones/MOSS-Image-Base-8-steps-dmd) | The same distillation built on Base rather than SFT; ships `lora_dmd2.safetensors`. |
+| **Base DMD2 8-step** | 8 | ![bf16][badge-bf16] | 1.01 GB | [![][gh-data--archetype]](https://huggingface.co/data-archetype/moss_image_base_dmd2) | Rank-128 distribution-matching distillation on **Base**, CFG 1 with no negative prompt and a fresh-noise `lcm` sampler at shift **4.4817**. ComfyUI and PEFT adapters are the same weights; load with the **bypass** LoRA loader, not the standard one, and use the bundled 8-step workflow. |
 | **Turbo MFD** | 4–8 | ![bf16][badge-bf16] | 0.08 GB × 5 | [![][gh-congruency]](https://huggingface.co/congruency/MOSS-Image-Turbo-MFD) | Mean Flow Distillation. Base v0.1 and SFT v0.1 (50 aux / 20 student), SFT v0.2 (12 aux / 6 student). `.comfy.safetensors` builds included. |
 | **Turbo Lite 16step-cfg1** | 16 | ![bf16][badge-bf16] ![fp8][badge-fp8] | 0.59 GB | [![][gh-Coffmeteor]](https://huggingface.co/Coffmeteor/MOSS-Image-Turbo) | Beta rank-128 LoRA, CFG 1, Euler/simple, shift 5, strength 1.0. Also ships 10.16 GB BF16 and 5.41 GB FP8 merged DiTs plus workflows. The card says anatomy is **not** improved. |
 
@@ -285,14 +290,15 @@ Style, character, control and fix adapters for the 5B DiT. Grouped by type, then
 | **Edit-HQ** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.50 GB | [![][gh-akhaliq]](https://huggingface.co/akhaliq/MOSS-Image-Edit-HQ) | Instruction-based image editing; every experiment, checkpoint and side-by-side is published. **Take armV5** — v6 introduced colour casts and the card does not recommend it. ComfyUI-plugin and ai-toolkit formats. |
 | **Transparent background** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.15 GB | [![][gh-genai--craft]](https://huggingface.co/genai-craft/transparent-lora-for-moss-image) | Outputs RGBA PNG cut-outs, logos and lettering directly, with no background-removal pass. Needs the [FLUX.2 Klein Alpha VAE](https://huggingface.co/trmz/flux2-klein-alpha) to decode four channels. |
 | **Moss-Image-Edit** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.30 GB | [![][gh-chinoll]](https://huggingface.co/chinoll/Moss-Image-Edit) ┊ [![][gh-Comfy--Org]](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/loras/moss_image_edit_lora_rank_64_bf16.safetensors) | The original rank-64 editing LoRA, also bundled in the Comfy-Org repack. Edit-HQ is the community effort to beat it. |
-| **Color-Depth Control** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.31 GB | [![][gh-darask0]](https://huggingface.co/darask0/MOSS-Image-color-depth-control) ┊ [![][gh-Comfy--Org]](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/loras/moss_image_color_depth_control.safetensors) | Follows a colour-region map plus a depth map; four checkpoints at 2500-step intervals. Bundled in the Comfy-Org repack. |
+| **Color-Depth Control** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.31 GB | [![][gh-Comfy--Org]](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/loras/moss_image_color_depth_control.safetensors) | Follows a colour-region map plus a depth map. Bundled in the Comfy-Org repack — the original darask0 repo is no longer public, so this file is the surviving source. A Civitai copy also sits in the [LoRA archive](#lora). |
 |  |  |  |  |  |  |
 | **MAX ULTRA hires LoHa** | ![Fix][ltype-fix] | ![bf16][badge-bf16] | 0.13–0.18 GB | [![][gh-comfyanonymous]](https://huggingface.co/comfyanonymous/MOSS_image_MAX_ULTRA_hires_lora_test) | LoHa tested at 4–10 MP; seven versions v0.1 through v0.7 with 9 MP examples and a no-LoRA baseline. |
 | **Natural faces** | ![Fix][ltype-fix] | ![bf16][badge-bf16] | 0.30–0.31 GB | [![][gh-deadman44]](https://huggingface.co/deadman44/MOSS_Image_LoRA) | Three checkpoints against the polished "AI face" look. Ships three ComfyUI T2I workflows. |
 |  |  |  |  |  |  |
+| **MOSS-Image LoRA archive** | ![Collection][ltype-collection] | ![bf16][badge-bf16] | 371.39 GB | ⚠️ [![][gh-mossloras]](https://huggingface.co/mossloras/moss-image-lora-archive) | Bulk **Civitai MOSS LoRAs dump**: 2,495 archived version IDs and 2,499 files, sorted into dated folders keyed by Civitai model/version ID. Uncurated, mixed quality and includes adult-only material; `manifest.json`, `skiplist.json` and `backfill_state.json` track an automated backfill. Not a curated set — this is a mirror to search, not a pack to download. |
 | **MOSS Image LoRA pack** | ![Collection][ltype-collection] | ![bf16][badge-bf16] | 12.16 GB | [![][gh-pmczip]](https://huggingface.co/pmczip/MOSS_Image_LoRAs) | 83 celebrity-likeness adapters, ~0.15 GB each, each with an obfuscated trigger token. Bespoke license; check it before redistribution. |
 | **Tendou Aris** | ![Character][ltype-character] | ![bf16][badge-bf16] | 0.20 GB | [![][gh-Te2douNin9]](https://huggingface.co/Te2douNin9/MOSS-Image-TendouAris) | Blue Archive character enhancer preserving face shape and halo; trigger `tendou_aris_moss`. |
-| **Kei r4** | ![Character][ltype-character] | ![bf16][badge-bf16] | 0.20 / 0.15 GB | [![][gh-Te2douNin9]](https://huggingface.co/Te2douNin9/MOSS-Image-Kei) | ComfyUI and LyCORIS builds; strength 0.9. Trigger `tendou_kei_moss`, and the card recommends stacking Tendou Aris to fix the halo. |
+| **Kei r4 / NL-1.3** | ![Character][ltype-character] | ![bf16][badge-bf16] | 0.20 / 0.15 / 0.40 / 0.30 GB | [![][gh-Te2douNin9]](https://huggingface.co/Te2douNin9/MOSS-Image-Kei) | Four checkpoints now: the r4 ComfyUI/LyCORIS pair at strength 0.9 and the newer **NL-1.3** `moss-kei-nlr3-1410-*` ComfyUI/native pair. Trigger `tendou_kei_moss`. r4 needs Tendou Aris stacked to fix the halo; NL-1.3 works alone and also fixes the ringed eyes. |
 | **EndField** | ![Character][ltype-character] | ![bf16][badge-bf16] | 0.20 GB | [![][gh-ShiyumeMeguri]](https://huggingface.co/ShiyumeMeguri/MossImage-EndField) | Rank-32 Arknights: Endfield style; the examples pair it with a 4-step speed LoRA at strength 1.0. |
 | **Mikayla Demaiter** | ![Character][ltype-character] | ![bf16][badge-bf16] | 0.15 / 0.07 GB | [![][gh-Playtime--AI]](https://huggingface.co/Playtime-AI/MOSS-Image-Mikayla_Demaiter) | v2 and v1 likeness checkpoints; trigger `Mikayla Demaiter`. |
 |  |  |  |  |  |  |
@@ -301,13 +307,33 @@ Style, character, control and fix adapters for the 5B DiT. Grouped by type, then
 | **Soft-light 3D anime** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.30 GB | [![][gh-Helives]](https://huggingface.co/Helives/Soft-light-3D-Anime-style-For-MOSS) | V2 switches to DoRA at rank 64 for deeper cel-shaded lighting and fewer oversized heads. |
 | **Kodachrome V2** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.04 GB | [![][gh-aoleg]](https://huggingface.co/aoleg/MOSS-Image-Kodachrome-V2) | LoKr reproducing 1940s 4x5 Kodachrome colour and contrast; V2 retrains with a low-noise timestep bias so composition stops leaking from the dataset. |
 | **nin style** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.20 / 0.15 GB | [![][gh-Te2douNin9]](https://huggingface.co/Te2douNin9/MOSS-Image-nin) | Crisp Japanese anime illustration look, ComfyUI and LyCORIS builds, strength 1.0. |
+| **PixelArt 16x16** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.15 GB | [![][gh-Angais]](https://huggingface.co/Angais/MOSS-Image-PixelArt-16x16) | Rank-32 adapter drawing one 16×16 pixel-art game icon per image on a flat magenta background that keys out cleanly; trigger `pixel art 16x16 game icon`. Trained on a synthetic sprite set, Apache-2.0. |
 | **Anime screenscap** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.07 GB | [![][gh-RunningHubAI]](https://huggingface.co/RunningHubAI/rh-anime-screenscap-mossimage-v1.safetensors-lora) | Anime screenshot-style adapter from RunningHub. |
 | **hh48288196 style** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.01 GB | [![][gh-RunningHubAI]](https://huggingface.co/RunningHubAI/rh-hh48288196-style-moss-image-v1-lora) | Compact 12 MB style adapter from RunningHub. |
 |  |  |  |  |  |  |
 | **NSFW uncensored** | ![NSFW][ltype-nsfw] | ![bf16][badge-bf16] | 27.41 GB repo | ⚠️ [![][gh-Ansh92928219]](https://huggingface.co/Ansh92928219/Moss-image-nsfw-uncensored-lora?not-for-all-audiences=true) | Adult-only, gated on Hugging Face; trigger `moss_xvstyle`. The repo also carries a full merged diffusers model, which is why its byte total is large. |
 
 > [!NOTE]
-> The two **control** rows bundled into the Comfy-Org repack are linked twice on purpose: the original repos carry the training cards and extra checkpoints, while the repack files are ready to drop into `models/loras/`. The transparent-background LoRA is the only one here that needs a different VAE — [trmz/flux2-klein-alpha](https://huggingface.co/trmz/flux2-klein-alpha) decodes the fourth channel.
+> The **Color-Depth Control** weights now live only in the Comfy-Org repack: the original `darask0` repo started returning 401 on 2026-11-10. The transparent-background LoRA is the only one here that needs a different VAE — [trmz/flux2-klein-alpha](https://huggingface.co/trmz/flux2-klein-alpha) decodes the fourth channel.
+
+<p id="lora-control" align="center">· · · · · · · · · · · · · ·</p>
+
+### ▣ Condition-map control LoRAs
+
+Seven sibling repos from **thedeoxen**, all trained on **MOSS-Image-SFT**. Despite `controlnet` in their names, these are **ControlNet-style edit LoRAs**, not ControlNets and not the official MOSS colour/depth concat adapter: load one with a LoRA loader and pass a single control image through **Text Encode MOSS-Image Edit**. Each repo ships its own ComfyUI workflow.
+
+| Condition | Checkpoint | Size | Links | Control image |
+| :--- | :---: | :---: | :---: | :--- |
+| **Pose** | step 4500 | 0.29 GB | [![][gh-thedeoxen]](https://huggingface.co/thedeoxen/MOSS-Image-pose-controlnet) | DWPose / OpenPose skeleton on black; the prompt sets character, clothing and scene. |
+| **Depth** | step 5000 | 0.29 GB | [![][gh-thedeoxen]](https://huggingface.co/thedeoxen/MOSS-Image-depth-controlnet) | Grayscale depth map, near is white; follows distance and layout. |
+| **Segmentation** | step 4500 | 0.29 GB | [![][gh-thedeoxen]](https://huggingface.co/thedeoxen/MOSS-Image-segmentation-controlnet) | Flat-colour region map; the prompt decides what each region becomes. |
+| **Scribble** | step 5000 | 0.29 GB | [![][gh-thedeoxen]](https://huggingface.co/thedeoxen/MOSS-Image-scribble-controlnet) | Loose white strokes on black; texture and style stay free. |
+| **Normal map** | step 5000 | 0.29 GB | [![][gh-thedeoxen]](https://huggingface.co/thedeoxen/MOSS-Image-normal-controlnet) | Colour normal map; follows surface direction and volume. |
+| **Lineart** | step 5000 | 0.29 GB | [![][gh-thedeoxen]](https://huggingface.co/thedeoxen/MOSS-Image-lineart-controlnet) | Fine white line drawing on black; the prompt sets colour and material. |
+| **Canny** | step 4500 | 0.29 GB | [![][gh-thedeoxen]](https://huggingface.co/thedeoxen/MOSS-Image-canny-controlnet) | White-on-black Canny edges; follows contours and framing. |
+
+> [!NOTE]
+> All seven were published **2026-11-10** and are the same 0.29 GB adapter shape, so pick by the map you can produce. The [Comfy-Org colour-depth adapter](#official-comfy) is a different, concatenated architecture — these rows do not replace it.
 
 <p id="encoders" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
@@ -358,6 +384,7 @@ Ready-made ComfyUI graphs and the node packs that make them work. JSON-only repo
 | **MossPanelDataset** | MIT | [![][gh-sepiablue--ai]](https://github.com/sepiablue-ai/ComfyUI-MossPanelDataset) | Pick one of 196 manga panel layouts (2–6 panels) from previews, then fill characters, scenes and dialogue; inputs grow and shrink with the layout and restore when you switch back. Catalog works offline. |
 | **ComfyUI Mobile Pocket** | MIT | [![][gh-Klark61]](https://github.com/Klark61/ComfyUI-Mobile-Pocket) | Phone UI for Android/iOS with a Generate screen that builds a form from saved workflows, plus the full node editor reworked for touch. |
 | **MOSS LowVRAM Optimized** | — | [![][gh-Andy--linux]](https://github.com/Andy-linux/ComfyUI-MOSS-LowVRAM-Optimized) | Multi-precision inference with a VRAM budget and weight-scheduling. This is the node pack the [Kohaku FP8 row weights](#quant-lowbit) are cut for. |
+| **MossImageTools** | — | [![][gh-hybskgks28275]](https://github.com/hybskgks28275/ComfyUI-MossImageTools) | **Create Bounding Boxes (MossImage)**: a visual region editor for native JSON layout prompts — 32×32 grid, drag/resize/undo, per-region description and image text, JSON import/export, EN/JA UI. Outputs `bboxes` and `elements` for the standard MOSS-Image Layout Prompt node. Needs a recent ComfyUI with the V3 API (`io.Array`, `io.BoundingBox`); no build step. |
 
 > [!NOTE]
 > The two ukr8b3g-cmyk packs are experimental and describe themselves as such. Both assume the SFT checkpoint; if you run Base, the [50-step defaults](#quick-start) are a safer starting point.
@@ -461,6 +488,7 @@ new number.
 [gh-akhaliq]: https://img.shields.io/badge/akhaliq-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Andy--linux]: https://img.shields.io/badge/Andy--linux-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-Andylinux]: https://img.shields.io/badge/Andylinux-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-Angais]: https://img.shields.io/badge/Angais-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Ansh92928219]: https://img.shields.io/badge/Ansh92928219-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-aoleg]: https://img.shields.io/badge/aoleg-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-axiomofmind]: https://img.shields.io/badge/axiomofmind-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -470,13 +498,15 @@ new number.
 [gh-comfyanonymous]: https://img.shields.io/badge/comfyanonymous-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-congruency]: https://img.shields.io/badge/congruency-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-cyberlangke]: https://img.shields.io/badge/cyberlangke-lightgrey?style=flat-square&logo=huggingface&logoColor=white
-[gh-darask0]: https://img.shields.io/badge/darask0-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-data--archetype]: https://img.shields.io/badge/data--archetype-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-deadman44]: https://img.shields.io/badge/deadman44-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Disty0]: https://img.shields.io/badge/Disty0-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-DutchIT]: https://img.shields.io/badge/DutchIT-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-easygoing0114]: https://img.shields.io/badge/easygoing0114-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-Epyan]: https://img.shields.io/badge/Epyan-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-genai--craft]: https://img.shields.io/badge/genai--craft-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Helives]: https://img.shields.io/badge/Helives-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-hybskgks28275]: https://img.shields.io/badge/hybskgks28275-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-KBlueLeaf]: https://img.shields.io/badge/KBlueLeaf-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Klark61]: https://img.shields.io/badge/Klark61-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-KohakuBlueleaf]: https://img.shields.io/badge/KohakuBlueleaf-17a2b8?style=flat-square&logo=github&logoColor=white
@@ -486,6 +516,7 @@ new number.
 [gh-loyalchiiina]: https://img.shields.io/badge/loyalchiiina-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-marduk191]: https://img.shields.io/badge/marduk191-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-mischiefaudio]: https://img.shields.io/badge/mischiefaudio-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-mossloras]: https://img.shields.io/badge/mossloras-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-nebulette]: https://img.shields.io/badge/nebulette-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-OpenMOSS]: https://img.shields.io/badge/OpenMOSS-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-OpenMOSS--Team]: https://img.shields.io/badge/OpenMOSS--Team-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -499,6 +530,7 @@ new number.
 [gh-ShiyumeMeguri]: https://img.shields.io/badge/ShiyumeMeguri-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Spectrallic]: https://img.shields.io/badge/Spectrallic-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Te2douNin9]: https://img.shields.io/badge/Te2douNin9-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-thedeoxen]: https://img.shields.io/badge/thedeoxen-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-ukr8b3g--cmyk]: https://img.shields.io/badge/ukr8b3g--cmyk-17a2b8?style=flat-square&logo=github&logoColor=white
 
 <!-- PRECISION BADGES -->

@@ -8,7 +8,7 @@ Everything here trades sampling steps for fidelity. The official model is **50 s
 
 ### ▣ The lineage
 
-Most few-step builds descend from one DMD chain; the MFD and 16-step lines are independent.
+Most few-step builds descend from one SFT DMD chain; the MFD, 16-step and Base DMD2 lines are independent.
 
 ```text
 OpenMOSS-Team/MOSS-Image-SFT   50 steps · CFG 3 · shift 5
@@ -19,6 +19,9 @@ OpenMOSS-Team/MOSS-Image-SFT   50 steps · CFG 3 · shift 5
         │                                             └─► Spectrallic 8-step INT8 ConvRot
         ├─► congruency Turbo MFD            4–8 steps  (independent, Mean Flow)
         └─► Coffmeteor Turbo Lite          16 steps · CFG 1  (independent, beta)
+
+OpenMOSS-Team/MOSS-Image-Base  50 steps · CFG 3 · shift 5
+        └─► data-archetype DMD2           8 steps · CFG 1  (rank 128, shift 4.4817)
 ```
 
 The [IDM card](https://huggingface.co/akhaliq/MOSS-Image-IDM-2-Steps) documents the chain and an honest regression: its **v2 edit continuation degraded general text-to-image**, so v1 export 750 is the recommended T2I checkpoint. The 8-step DMD repos are marked work-in-progress by their author. Pick one family and keep its sampling settings.
@@ -30,10 +33,11 @@ The [IDM card](https://huggingface.co/akhaliq/MOSS-Image-IDM-2-Steps) documents 
 | Name | Steps | Precision | Size | Links | Notes |
 | :--- | :---: | :---: | :---: | :---: | :--- |
 | **IDM 2 steps** | 2 | ![bf16][badge-bf16] | 2.18 GB | [![][gh-akhaliq]](https://huggingface.co/akhaliq/MOSS-Image-IDM-2-Steps) | Two DiT forwards at 1024², no CFG. Community Intrinsic Distribution Matching; v1 at `runs/idm/export/000750/` for T2I, v2 folded adapter for editing. The repo is 89.79 GB including training caches. |
-| **rapid-moss 4-step** | 4 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-darask0]](https://huggingface.co/darask0/MOSS-Image_4-step_adapter_lora) | DMAD adapter on the 8-step DMD student, CFG-free. Ships `lora.safetensors` + `time_embedding.safetensors`. |
+| **rapid-moss 4-step** | 4 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-Epyan]](https://huggingface.co/Epyan/MOSS-Image_4-step_adapter_lora) | DMAD adapter on the 8-step DMD student, CFG-free. Ships `lora.safetensors` + `time_embedding.safetensors`, the training code and the card. **Mirror**: the original darask0 repo went private; this copy carries the same 46-file / 1.24 GB set, including the 1.19 GB LoRA, training code and original card. |
 | **SFT 4-step v2.0** | 4 | ![bf16][badge-bf16] ![fp32][badge-fp32] | 1.19 / 20.33 GB | [![][gh-akhaliq]](https://huggingface.co/akhaliq/MOSS-Image-SFT-4-steps) | The widely used 4-step line; also ships a 20.33 GB FP32 merged DiT and full diffusers layout. Parent of the merged GGUF below. |
 | **SFT 8-step DMD** | 8 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-lodestones]](https://huggingface.co/lodestones/MOSS-Image-SFT-8-steps-dmd) | Reference data-space DMD distill; `lora.safetensors`, `lora_latest.safetensors`, generator and full transformer. 23.98 GB repo. |
 | **Base 8-step DMD** | 8 | ![bf16][badge-bf16] | 1.19 GB | [![][gh-lodestones]](https://huggingface.co/lodestones/MOSS-Image-Base-8-steps-dmd) | The same distillation built on Base rather than SFT; ships `lora_dmd2.safetensors`. |
+| **Base DMD2 8-step** | 8 | ![bf16][badge-bf16] | 1.01 GB | [![][gh-data--archetype]](https://huggingface.co/data-archetype/moss_image_base_dmd2) | Rank-128 distribution-matching distillation on **Base**, CFG 1 with no negative prompt and a fresh-noise `lcm` sampler at shift **4.4817**. ComfyUI and PEFT adapters are the same weights; load with the **bypass** LoRA loader, not the standard one, and use the bundled 8-step workflow. |
 | **Turbo MFD** | 4–8 | ![bf16][badge-bf16] | 0.08 GB × 5 | [![][gh-congruency]](https://huggingface.co/congruency/MOSS-Image-Turbo-MFD) | Mean Flow Distillation. Base v0.1 and SFT v0.1 (50 aux / 20 student), SFT v0.2 (12 aux / 6 student). `.comfy.safetensors` builds included. |
 | **Turbo Lite 16step-cfg1** | 16 | ![bf16][badge-bf16] ![fp8][badge-fp8] | 0.59 GB | [![][gh-Coffmeteor]](https://huggingface.co/Coffmeteor/MOSS-Image-Turbo) | Beta rank-128 LoRA, CFG 1, Euler/simple, shift 5, strength 1.0. Also ships 10.16 GB BF16 and 5.41 GB FP8 merged DiTs plus workflows. The card says anatomy is **not** improved. |
 

@@ -22,6 +22,7 @@
 [gh-akhaliq]: https://img.shields.io/badge/akhaliq-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Andy--linux]: https://img.shields.io/badge/Andy--linux-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-Andylinux]: https://img.shields.io/badge/Andylinux-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-Angais]: https://img.shields.io/badge/Angais-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Ansh92928219]: https://img.shields.io/badge/Ansh92928219-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-aoleg]: https://img.shields.io/badge/aoleg-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-axiomofmind]: https://img.shields.io/badge/axiomofmind-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -31,13 +32,15 @@
 [gh-comfyanonymous]: https://img.shields.io/badge/comfyanonymous-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-congruency]: https://img.shields.io/badge/congruency-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-cyberlangke]: https://img.shields.io/badge/cyberlangke-lightgrey?style=flat-square&logo=huggingface&logoColor=white
-[gh-darask0]: https://img.shields.io/badge/darask0-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-data--archetype]: https://img.shields.io/badge/data--archetype-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-deadman44]: https://img.shields.io/badge/deadman44-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Disty0]: https://img.shields.io/badge/Disty0-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-DutchIT]: https://img.shields.io/badge/DutchIT-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-easygoing0114]: https://img.shields.io/badge/easygoing0114-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-Epyan]: https://img.shields.io/badge/Epyan-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-genai--craft]: https://img.shields.io/badge/genai--craft-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Helives]: https://img.shields.io/badge/Helives-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-hybskgks28275]: https://img.shields.io/badge/hybskgks28275-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-KBlueLeaf]: https://img.shields.io/badge/KBlueLeaf-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Klark61]: https://img.shields.io/badge/Klark61-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-KohakuBlueleaf]: https://img.shields.io/badge/KohakuBlueleaf-17a2b8?style=flat-square&logo=github&logoColor=white
@@ -47,6 +50,7 @@
 [gh-loyalchiiina]: https://img.shields.io/badge/loyalchiiina-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-marduk191]: https://img.shields.io/badge/marduk191-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-mischiefaudio]: https://img.shields.io/badge/mischiefaudio-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-mossloras]: https://img.shields.io/badge/mossloras-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-nebulette]: https://img.shields.io/badge/nebulette-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-OpenMOSS]: https://img.shields.io/badge/OpenMOSS-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-OpenMOSS--Team]: https://img.shields.io/badge/OpenMOSS--Team-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -60,6 +64,7 @@
 [gh-ShiyumeMeguri]: https://img.shields.io/badge/ShiyumeMeguri-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Spectrallic]: https://img.shields.io/badge/Spectrallic-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Te2douNin9]: https://img.shields.io/badge/Te2douNin9-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-thedeoxen]: https://img.shields.io/badge/thedeoxen-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-ukr8b3g--cmyk]: https://img.shields.io/badge/ukr8b3g--cmyk-17a2b8?style=flat-square&logo=github&logoColor=white
 
 <!-- PRECISION BADGES -->

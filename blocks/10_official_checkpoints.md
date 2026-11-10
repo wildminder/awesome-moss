@@ -49,7 +49,7 @@ Same architecture and sampling as Base, fine-tuned on curated data. It is the pa
 >
 > Destination folders: **Image Model** → `models/diffusion_models/`, **Text Encoder** → `models/text_encoders/`, **VAE** → `models/vae/`, both LoRA rows → `models/loras/`.
 >
-> The single-file **Text Encoder** is 19.31 GB while the four official diffusers shards total 16.79 GB — different packaging, not a different model. The two LoRA rows are community work by [darask0](https://huggingface.co/darask0/MOSS-Image-color-depth-control) and [chinoll](https://huggingface.co/chinoll/Moss-Image-Edit), repacked here for convenience rather than official OpenMOSS releases.
+> The single-file **Text Encoder** is 19.31 GB while the four official diffusers shards total 16.79 GB — different packaging, not a different model. The two LoRA rows are community work by darask0 and [chinoll](https://huggingface.co/chinoll/Moss-Image-Edit), repacked here for convenience rather than official OpenMOSS releases. The darask0 colour-depth repo is no longer public, so these repacked files are the surviving source.
 >
 > Ready-made graphs for this pack live in [Comfy-Org/workflow_templates](https://github.com/Comfy-Org/workflow_templates/blob/main/templates/image_moss_image_t2i.json) (text-to-image, Base text-to-image, edit LoRA).
 

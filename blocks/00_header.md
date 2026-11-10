@@ -40,6 +40,7 @@ A curated list of checkpoints, quants, step-distilled builds, LoRAs, text encode
   * [Distilled adapters](#turbo-adapters)
   * [Merged few-step DiTs](#turbo-merged)
 * [LoRA &amp; adapters](#lora)
+  * [Condition-map control LoRAs](#lora-control)
 * [Text encoders &amp; prompt engines](#encoders)
 * [Workflows &amp; custom nodes](#workflow)
 * [Tools &amp; integrations](#tools)
