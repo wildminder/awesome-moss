@@ -283,7 +283,7 @@ Distillation baked into the weights, so no LoRA loader is needed. Good drop-ins 
 
 ## ◉ LoRA &amp; adapters
 
-Style, character, control and fix adapters for the 5B DiT. Grouped by type, then roughly by size. Most cards say **SFT preferred** even when trained on Base; where both diffusers and ComfyUI formats exist, the repo root usually holds both. Sizes are the primary adapter file, not the whole repo.
+Style, character, control, edit and fix adapters for the 5B DiT. Grouped by type, then roughly by size. Most cards say **SFT preferred** even when trained on Base; where both diffusers and ComfyUI formats exist, the repo root usually holds both. Sizes are the primary adapter file, not the whole repo. A dash in **Precision** means the card does not state a dtype.
 
 | Name | Type | Precision | Size | Links | Notes |
 | :--- | :---: | :---: | :---: | :---: | :--- |
@@ -291,6 +291,9 @@ Style, character, control and fix adapters for the 5B DiT. Grouped by type, then
 | **Transparent background** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.15 GB | [![][gh-genai--craft]](https://huggingface.co/genai-craft/transparent-lora-for-moss-image) | Outputs RGBA PNG cut-outs, logos and lettering directly, with no background-removal pass. Needs the [FLUX.2 Klein Alpha VAE](https://huggingface.co/trmz/flux2-klein-alpha) to decode four channels. |
 | **Moss-Image-Edit** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.30 GB | [![][gh-chinoll]](https://huggingface.co/chinoll/Moss-Image-Edit) ┊ [![][gh-Comfy--Org]](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/loras/moss_image_edit_lora_rank_64_bf16.safetensors) | The original rank-64 editing LoRA, also bundled in the Comfy-Org repack. Edit-HQ is the community effort to beat it. |
 | **Color-Depth Control** | ![Control][ltype-control] | ![bf16][badge-bf16] | 0.31 GB | [![][gh-Comfy--Org]](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/loras/moss_image_color_depth_control.safetensors) | Follows a colour-region map plus a depth map. Bundled in the Comfy-Org repack — the original darask0 repo is no longer public, so this file is the surviving source. A Civitai copy also sits in the [LoRA archive](#lora). |
+| **Tile Control** | ![Control][ltype-control] | — | 0.07–0.27 GB | [![][gh-Xabsurd]](https://huggingface.co/Xabsurd/MOSS-Image-Tile-Control) | Structure-preserving tile control for detail regeneration after upscaling. **beta 2** is a 0.27 GB LoRA for **Base**, loaded through ComfyUI's built-in colour/depth control node with the reference image as `color_map`; **beta 3** is a 0.07 GB residual **model patch** for **SFT**, needing the bundled `ComfyUI-Moss-Tile-Control` nodes and `models/model_patches/`. Weights and strength values are not interchangeable. No license declared; evaluation is subjective, with no benchmark. |
+|  |  |  |  |  |  |
+| **CROWN Anime2Real 1:1** | ![Edit][ltype-edit] | — | 0.30 GB | [![][gh-S3ckn11g0r]](https://huggingface.co/S3ckn11g0r/CROWN-MOSS-Image-Edit-Anime2Real-1to1) | Image-to-image **edit** LoRA on the MOSS-Image Edit stack: turns 2D anime into 1:1 photorealistic portraits, rank 64 on 514 curated pairs. Trigger `crown_anime2real, A2R`; weight 0.90–1.00, 28–30 steps, CFG 3.2–3.5. Bespoke license. |
 |  |  |  |  |  |  |
 | **MAX ULTRA hires LoHa** | ![Fix][ltype-fix] | ![bf16][badge-bf16] | 0.13–0.18 GB | [![][gh-comfyanonymous]](https://huggingface.co/comfyanonymous/MOSS_image_MAX_ULTRA_hires_lora_test) | LoHa tested at 4–10 MP; seven versions v0.1 through v0.7 with 9 MP examples and a no-LoRA baseline. |
 | **Natural faces** | ![Fix][ltype-fix] | ![bf16][badge-bf16] | 0.30–0.31 GB | [![][gh-deadman44]](https://huggingface.co/deadman44/MOSS_Image_LoRA) | Three checkpoints against the polished "AI face" look. Ships three ComfyUI T2I workflows. |
@@ -308,6 +311,8 @@ Style, character, control and fix adapters for the 5B DiT. Grouped by type, then
 | **Kodachrome V2** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.04 GB | [![][gh-aoleg]](https://huggingface.co/aoleg/MOSS-Image-Kodachrome-V2) | LoKr reproducing 1940s 4x5 Kodachrome colour and contrast; V2 retrains with a low-noise timestep bias so composition stops leaking from the dataset. |
 | **nin style** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.20 / 0.15 GB | [![][gh-Te2douNin9]](https://huggingface.co/Te2douNin9/MOSS-Image-nin) | Crisp Japanese anime illustration look, ComfyUI and LyCORIS builds, strength 1.0. |
 | **PixelArt 16x16** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.15 GB | [![][gh-Angais]](https://huggingface.co/Angais/MOSS-Image-PixelArt-16x16) | Rank-32 adapter drawing one 16×16 pixel-art game icon per image on a flat magenta background that keys out cleanly; trigger `pixel art 16x16 game icon`. Trained on a synthetic sprite set, Apache-2.0. |
+| **CROWN Douyin OOTD** | ![Style][ltype-style] | — | 0.30 GB | [![][gh-S3ckn11g0r]](https://huggingface.co/S3ckn11g0r/CROWN-MOSS-Image-Douyin-Babe-OOTD) | Portrait and fashion photorealism in two buckets: close-ups and OOTD body shots, rank 64 on 355 deduplicated images. Triggers `crown_douyin_babe` + `crown_babe_face` / `crown_babe_ootd`; weight 0.85–0.95, 28–30 steps, CFG 3.5. Bespoke license. |
+| **BAStyle v1** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.15 GB | [![][gh-nekoshrimp]](https://huggingface.co/nekoshrimp/MOSS-Image-BAStyle-v1) | Blue Archive cel-shaded illustration style; rank 32, DiT-only with the text encoder frozen, 58 captioned images. Trigger `bastyle` at the start of a natural-language prompt; strength 0.90–0.95. Halos are not baked into the trigger. Ships a dependency-free ComfyUI workflow. CC-BY-NC-4.0. |
 | **Anime screenscap** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.07 GB | [![][gh-RunningHubAI]](https://huggingface.co/RunningHubAI/rh-anime-screenscap-mossimage-v1.safetensors-lora) | Anime screenshot-style adapter from RunningHub. |
 | **hh48288196 style** | ![Style][ltype-style] | ![bf16][badge-bf16] | 0.01 GB | [![][gh-RunningHubAI]](https://huggingface.co/RunningHubAI/rh-hh48288196-style-moss-image-v1-lora) | Compact 12 MB style adapter from RunningHub. |
 |  |  |  |  |  |  |
@@ -518,6 +523,7 @@ new number.
 [gh-mischiefaudio]: https://img.shields.io/badge/mischiefaudio-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-mossloras]: https://img.shields.io/badge/mossloras-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-nebulette]: https://img.shields.io/badge/nebulette-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-nekoshrimp]: https://img.shields.io/badge/nekoshrimp-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-OpenMOSS]: https://img.shields.io/badge/OpenMOSS-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-OpenMOSS--Team]: https://img.shields.io/badge/OpenMOSS--Team-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Ouinche]: https://img.shields.io/badge/Ouinche-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -526,12 +532,14 @@ new number.
 [gh-Playtime--AI]: https://img.shields.io/badge/Playtime--AI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-pmczip]: https://img.shields.io/badge/pmczip-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-RunningHubAI]: https://img.shields.io/badge/RunningHubAI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-S3ckn11g0r]: https://img.shields.io/badge/S3ckn11g0r-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-sepiablue--ai]: https://img.shields.io/badge/sepiablue--ai-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-ShiyumeMeguri]: https://img.shields.io/badge/ShiyumeMeguri-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Spectrallic]: https://img.shields.io/badge/Spectrallic-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Te2douNin9]: https://img.shields.io/badge/Te2douNin9-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-thedeoxen]: https://img.shields.io/badge/thedeoxen-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-ukr8b3g--cmyk]: https://img.shields.io/badge/ukr8b3g--cmyk-17a2b8?style=flat-square&logo=github&logoColor=white
+[gh-Xabsurd]: https://img.shields.io/badge/Xabsurd-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 
 <!-- PRECISION BADGES -->
 [badge-bf16]: https://img.shields.io/badge/bf16-0077cc?style=flat-square
@@ -566,6 +574,7 @@ new number.
 [ltype-finetune]: https://img.shields.io/badge/Finetune-6f42c1?style=flat-square
 [ltype-aio]: https://img.shields.io/badge/All--in--one-17a2b8?style=flat-square
 [ltype-control]: https://img.shields.io/badge/Control-17a2b8?style=flat-square
+[ltype-edit]: https://img.shields.io/badge/Edit-b02a37?style=flat-square
 [ltype-fix]: https://img.shields.io/badge/Fix-0077cc?style=flat-square
 [ltype-collection]: https://img.shields.io/badge/Collection-6f42c1?style=flat-square
 [ltype-character]: https://img.shields.io/badge/Character-fe7d37?style=flat-square

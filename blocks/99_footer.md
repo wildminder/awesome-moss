@@ -52,6 +52,7 @@
 [gh-mischiefaudio]: https://img.shields.io/badge/mischiefaudio-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-mossloras]: https://img.shields.io/badge/mossloras-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-nebulette]: https://img.shields.io/badge/nebulette-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-nekoshrimp]: https://img.shields.io/badge/nekoshrimp-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-OpenMOSS]: https://img.shields.io/badge/OpenMOSS-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-OpenMOSS--Team]: https://img.shields.io/badge/OpenMOSS--Team-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Ouinche]: https://img.shields.io/badge/Ouinche-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -60,12 +61,14 @@
 [gh-Playtime--AI]: https://img.shields.io/badge/Playtime--AI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-pmczip]: https://img.shields.io/badge/pmczip-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-RunningHubAI]: https://img.shields.io/badge/RunningHubAI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-S3ckn11g0r]: https://img.shields.io/badge/S3ckn11g0r-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-sepiablue--ai]: https://img.shields.io/badge/sepiablue--ai-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-ShiyumeMeguri]: https://img.shields.io/badge/ShiyumeMeguri-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Spectrallic]: https://img.shields.io/badge/Spectrallic-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Te2douNin9]: https://img.shields.io/badge/Te2douNin9-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-thedeoxen]: https://img.shields.io/badge/thedeoxen-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-ukr8b3g--cmyk]: https://img.shields.io/badge/ukr8b3g--cmyk-17a2b8?style=flat-square&logo=github&logoColor=white
+[gh-Xabsurd]: https://img.shields.io/badge/Xabsurd-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 
 <!-- PRECISION BADGES -->
 [badge-bf16]: https://img.shields.io/badge/bf16-0077cc?style=flat-square
@@ -100,6 +103,7 @@
 [ltype-finetune]: https://img.shields.io/badge/Finetune-6f42c1?style=flat-square
 [ltype-aio]: https://img.shields.io/badge/All--in--one-17a2b8?style=flat-square
 [ltype-control]: https://img.shields.io/badge/Control-17a2b8?style=flat-square
+[ltype-edit]: https://img.shields.io/badge/Edit-b02a37?style=flat-square
 [ltype-fix]: https://img.shields.io/badge/Fix-0077cc?style=flat-square
 [ltype-collection]: https://img.shields.io/badge/Collection-6f42c1?style=flat-square
 [ltype-character]: https://img.shields.io/badge/Character-fe7d37?style=flat-square
