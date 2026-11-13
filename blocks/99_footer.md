@@ -24,6 +24,7 @@
 [gh-Andylinux]: https://img.shields.io/badge/Andylinux-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Angais]: https://img.shields.io/badge/Angais-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Ansh92928219]: https://img.shields.io/badge/Ansh92928219-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-anyMODE]: https://img.shields.io/badge/anyMODE-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-aoleg]: https://img.shields.io/badge/aoleg-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-axiomofmind]: https://img.shields.io/badge/axiomofmind-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-chinoll]: https://img.shields.io/badge/chinoll-lightgrey?style=flat-square&logo=huggingface&logoColor=white
