@@ -27,6 +27,7 @@
 [gh-anyMODE]: https://img.shields.io/badge/anyMODE-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-aoleg]: https://img.shields.io/badge/aoleg-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-axiomofmind]: https://img.shields.io/badge/axiomofmind-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-bag3labo]: https://img.shields.io/badge/bag3labo-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-chinoll]: https://img.shields.io/badge/chinoll-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Coffmeteor]: https://img.shields.io/badge/Coffmeteor-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Comfy--Org]: https://img.shields.io/badge/Comfy--Org-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -46,6 +47,7 @@
 [gh-Klark61]: https://img.shields.io/badge/Klark61-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-KohakuBlueleaf]: https://img.shields.io/badge/KohakuBlueleaf-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-leejet]: https://img.shields.io/badge/leejet-17a2b8?style=flat-square&logo=github&logoColor=white
+[gh-LiseTY]: https://img.shields.io/badge/LiseTY-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-lite--infer]: https://img.shields.io/badge/lite--infer-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-lodestones]: https://img.shields.io/badge/lodestones-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-loyalchiiina]: https://img.shields.io/badge/loyalchiiina-17a2b8?style=flat-square&logo=github&logoColor=white
@@ -61,8 +63,10 @@
 [gh-OzzyGT]: https://img.shields.io/badge/OzzyGT-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Playtime--AI]: https://img.shields.io/badge/Playtime--AI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-pmczip]: https://img.shields.io/badge/pmczip-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-RBXLSP]: https://img.shields.io/badge/RBXLSP-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-RunningHubAI]: https://img.shields.io/badge/RunningHubAI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-S3ckn11g0r]: https://img.shields.io/badge/S3ckn11g0r-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-SEEDRAAI]: https://img.shields.io/badge/SEEDRAAI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-sepiablue--ai]: https://img.shields.io/badge/sepiablue--ai-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-ShiyumeMeguri]: https://img.shields.io/badge/ShiyumeMeguri-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Spectrallic]: https://img.shields.io/badge/Spectrallic-lightgrey?style=flat-square&logo=huggingface&logoColor=white
