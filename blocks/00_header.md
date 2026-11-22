@@ -35,6 +35,7 @@ A curated list of checkpoints, quants, step-distilled builds, LoRAs, text encode
   * [SDNQ (4/8-bit)](#quant-sdnq)
   * [Nunchaku Lite (SVDQuant)](#quant-nunchaku)
   * [FP8 &amp; INT8 ConvRot](#quant-lowbit)
+  * [Kroma (Snapdragon NPU)](#quant-kroma)
 * [Turbo &amp; step distillation](#turbo)
   * [The lineage](#turbo-lineage)
   * [Distilled adapters](#turbo-adapters)

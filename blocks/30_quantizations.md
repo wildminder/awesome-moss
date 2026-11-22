@@ -56,3 +56,13 @@ Single-file DiTs for ComfyUI's standard loaders. The [official Comfy-Org repack]
 > [!NOTE]
 > **SFT_clear** also ships FP8, MXFP8 and INT8 ConvRot HQ cuts of its own fine-tune (see [Fine-tunes](#finetune)), and the [Spectrallic 8-step builds](#turbo-merged) are INT8 ConvRot with distillation merged in. ConvRot files are not interchangeable across exporters: some releases keep `proj.q`/`proj.k`/`proj.v` separate while the Comfy-Org layout fuses them into `layers.N.proj.qkv`.
 
+<p id="quant-kroma" align="center">· · · · · · · · · · · · · ·</p>
+
+### ▣ Kroma (Snapdragon NPU)
+
+A full SFT stack repacked for the **Kroma** app, which runs image models on the NPU of Snapdragon phones. The weights are stored in another number format and rearranged into the engine's layout; the app downloads them itself and other loaders cannot use these files. Kroma is an independent project, not made or endorsed by the model makers. Apache-2.0.
+
+| Name | Precision | Size | Links | Notes |
+| :--- | :---: | :---: | :---: | :--- |
+| **MOSS-Image for Kroma** | ![fp16][badge-fp16] / q8 / q4 | 27.36 GB repo | [![][gh-Pixfanthav]](https://huggingface.co/Pixfanthav/MOSS-Image-Kroma) | Complete stack: `transformer/` 10.17 GB fp16 as made, `transformer_q8/` 5.05 GB and `transformer_q4/` 2.68 GB block cuts, `text_encoder/` 9.40 GB plus `text_encoder_q8`, VAE, and `extra/moss_bundle/turbo4` with 513 small block files. The q8/q4 cuts are Kroma's own number format, not GGUF or standard INT8/INT4. The GitHub app repo linked from the card returned **404** on 2026-11-23; the Hugging Face weights are intact. |
+

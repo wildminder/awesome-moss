@@ -28,6 +28,7 @@
 [gh-aoleg]: https://img.shields.io/badge/aoleg-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-axiomofmind]: https://img.shields.io/badge/axiomofmind-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-bag3labo]: https://img.shields.io/badge/bag3labo-17a2b8?style=flat-square&logo=github&logoColor=white
+[gh-cfgscale]: https://img.shields.io/badge/cfgscale-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-chinoll]: https://img.shields.io/badge/chinoll-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Coffmeteor]: https://img.shields.io/badge/Coffmeteor-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Comfy--Org]: https://img.shields.io/badge/Comfy--Org-lightgrey?style=flat-square&logo=huggingface&logoColor=white
@@ -56,11 +57,13 @@
 [gh-mossloras]: https://img.shields.io/badge/mossloras-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-nebulette]: https://img.shields.io/badge/nebulette-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-nekoshrimp]: https://img.shields.io/badge/nekoshrimp-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-openlimi]: https://img.shields.io/badge/openlimi-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-OpenMOSS]: https://img.shields.io/badge/OpenMOSS-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-OpenMOSS--Team]: https://img.shields.io/badge/OpenMOSS--Team-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Ouinche]: https://img.shields.io/badge/Ouinche-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-OuincheWinch]: https://img.shields.io/badge/OuincheWinch-17a2b8?style=flat-square&logo=github&logoColor=white
 [gh-OzzyGT]: https://img.shields.io/badge/OzzyGT-lightgrey?style=flat-square&logo=huggingface&logoColor=white
+[gh-Pixfanthav]: https://img.shields.io/badge/Pixfanthav-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-Playtime--AI]: https://img.shields.io/badge/Playtime--AI-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-pmczip]: https://img.shields.io/badge/pmczip-lightgrey?style=flat-square&logo=huggingface&logoColor=white
 [gh-RBXLSP]: https://img.shields.io/badge/RBXLSP-lightgrey?style=flat-square&logo=huggingface&logoColor=white
